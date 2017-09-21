@@ -20,6 +20,8 @@ class LobbyViewController: UIViewController, AVAudioPlayerDelegate {
     @IBOutlet var nameLabel: UILabel!  //名前表示のラベル
     @IBOutlet var staminaBar: UIProgressView! //スタミナ表示用ラベル
     @IBOutlet var levelLabel: UILabel! //レベル表示用ラベル
+    @IBOutlet var playerImageView: UIImageView!
+    
     
     
     
@@ -29,6 +31,7 @@ class LobbyViewController: UIViewController, AVAudioPlayerDelegate {
         //プレイヤーの設定
         
         player = Player(name: "勇者", imageName: "yusya.png")
+        playerImageView.image = player.image
         staminaBar.transform = CGAffineTransform(scaleX: 1.0, y: 4.0)
         
         nameLabel.text = player.name
@@ -57,9 +60,7 @@ class LobbyViewController: UIViewController, AVAudioPlayerDelegate {
         util.stopBGM()
     }
     
-    @IBOutlet var backgroundImageView: UIImageView!
-
-    @IBAction func toBattle(){
+       @IBAction func toBattle(){
         
         //スタミナが50以上あればスタミナ50消費して戦闘画面へ
         if stamina >= 50 {
@@ -70,7 +71,7 @@ class LobbyViewController: UIViewController, AVAudioPlayerDelegate {
         } else {
             
             //スタミナが足りない時はアラートを出す
-            let alert = UIAlertController(title: "バトルに行けません。", message: "スタミナを貯めてください。", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "バイトに行けません。", message: "スタミナを貯めてください。", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             

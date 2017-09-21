@@ -155,7 +155,45 @@ class BattleViewController: UIViewController {
             }
             
         }
+    }
+    
+    @IBAction func fireAction(){
+       
+        if isPlayerMoveValueMax && player.currentTP >= 40 {
+            
+            TechDraUtility.damageAnimation(imageView: enemyImageView)
+            util.playSE(fileName: "SE_fire")
+            // playerのTPはfire後に４０消耗する
+            player.currentTP -= 40
+            if player.currentTP <= 0 {
+                player.currentTP = 0
+            }
+            playerTPBar.progress = player.currentTP / player.maxTP
+            
+            player.currentMovePoint = 0
+            
+            if enemy.currentHP <= 0.0 {
+                finishBattle(vanishImageView: enemyImageView, winPlayer: true)
+                
+            }
+        }
         
+        
+    }
+    
+    @IBAction func tamaruAction(){
+        
+        if isPlayerMoveValueMax{
+            
+            util.playSE(fileName: "SE_fire")
+            //ためるアクションでは40TPアップ
+            player.currentTP += 40
+            
+            playerTPBar.progress = player.currentTP / player.maxTP
+            player.currentMovePoint = 0
+            
+        }
+    }
     
     func finishBattle(vanishImageView: UIImageView, winPlayer: Bool){
         
@@ -177,4 +215,4 @@ class BattleViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
 }
     }
-}
+
