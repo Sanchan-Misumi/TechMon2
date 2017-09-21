@@ -163,6 +163,10 @@ class BattleViewController: UIViewController {
             
             TechDraUtility.damageAnimation(imageView: enemyImageView)
             util.playSE(fileName: "SE_fire")
+            //fireでは敵のHPに１００ダメージを与える！
+            enemy.currentHP -= 100
+            enemyHPBar.setProgress(enemy.currentHP / enemy.maxHP, animated: true)
+            
             // playerのTPはfire後に４０消耗する
             player.currentTP -= 40
             if player.currentTP <= 0 {
@@ -193,6 +197,7 @@ class BattleViewController: UIViewController {
             player.currentMovePoint = 0
             
         }
+    
     }
     
     func finishBattle(vanishImageView: UIImageView, winPlayer: Bool){
@@ -215,4 +220,5 @@ class BattleViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
 }
     }
+
 
